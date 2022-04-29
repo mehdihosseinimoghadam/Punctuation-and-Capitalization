@@ -1,22 +1,3 @@
----
-title: 'Punctuation and Capitalization'
-date: 2022-04-27
-permalink: /posts/2022/04/Punctuation-and-Capitalization/
-tags:
-  - Punctuation and Capitalization
-  - Catalan Punctuation
-  - Catalan Capitalization
-  - Catalan Speech
-  - Catalan
-  - Catalan Speech To Text
-  - Catalan ASR
-  - Catalan Speech DataSet
-  - NeMo Punctuation
-  - Catalan Speech To Text
-  - Catalan ASR
-  - Catalan Tacotron2
-image: logan-armstrong-hVhfqhDYciU-unsplash.jpg
----
 
 This Repo Contains Implementation and explanation of Punctuation and Capitalization System for ASR models
 
@@ -24,9 +5,9 @@ This Repo Contains Implementation and explanation of Punctuation and Capitalizat
 
 ## Introduction
 
-Almost all automatic speech recognition(ASR) systems convert speech into text that has no capitalization or puntuation, which can result in miss understanding the generated tex. In this blog I expplain and implement capitalization or puntuation model with [Roberta](https://huggingface.co/PlanTL-GOB-ES/roberta-base-ca) language model for Catalan language. This tutorial is mainly based on Nvidia Nemo tutorial on capitalization or puntuation model [here](https://docs.nvidia.com/deeplearning/nemo/user-guide/docs/en/main/nlp/punctuation_and_capitalization.html#training-punctuation-and-capitalization-model).
+Almost all automatic speech recognition(ASR) systems convert speech into text that has no capitalization or punctuation, which can result in miss understanding the generated text. In this blog I explain and implement capitalization or punctuation model with [Roberta](https://huggingface.co/PlanTL-GOB-ES/roberta-base-ca) language model for Catalan language. This tutorial is mainly based on Nvidia Nemo tutorial on capitalization or punctuation model [here](https://docs.nvidia.com/deeplearning/nemo/user-guide/docs/en/main/nlp/punctuation_and_capitalization.html#training-punctuation-and-capitalization-model).
 
-## Language Model Based Capitalization and Puntuation model
+## Language Model Based Capitalization and Punctuation model
 - This model predicts if a sentence needs commas, periods, question marks, ...
 - Also model predicts if a given word should be Capitelized.
 
@@ -64,15 +45,15 @@ Each line of the `labels.txt` should follow the format: [LABEL] [SPACE] [LABEL] 
 ## Catalan Punctuation and Capitalization Data
 
 For this tutorial I used [this repo](https://github.com/Softcatala/ca-text-corpus/tree/master/data) and mereged `/content/ca-text-corpus/data/common-voice-sentences.txt`,
-              `/content/ca-text-corpus/data/dogc.txt`,
-              `/content/ca-text-corpus/data/dogv.txt`,
-              `/content/ca-text-corpus/data/riuraueditors.txt`,
-              `/content/ca-text-corpus/data/softcatala.txt`,
-              `/content/ca-text-corpus/data/wiki.ca.txt`,
-              `/content/ca-text-corpus/data/wiki.ca-mozilla_script.txt`
+              `dogc.txt`,
+              `dogv.txt`,
+              `riuraueditors.txt`,
+              `softcatala.txt`,
+              `wiki.ca.txt`,
+              `wiki.ca-mozilla_script.txt`
               files.
               <br>
- Using the following script you can convert any correctly capitelized and putuated text into mentioned training data format.
+ Using the following script you can convert any correctly capitalized and punctuated text into mentioned training data format.
  
  ```py
  import string
@@ -135,14 +116,14 @@ Once you make the training and validation data ready, then it is time to train y
 --------------------------------------------------------------------------------------------
 ## Model
 
-For this tutorial I used about `200000` sample sentences and trained them on top of [
+For this tutorial I used about `60000` sample sentences and trained them on top of [
 roberta-base-ca](https://huggingface.co/PlanTL-GOB-ES/roberta-base-ca).
-Complete notebook for data gathering as well as training the Punctuation and Capitalization model for catalan language can be found here [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/mehdihosseinimoghadam/Catalan-Text-to-Speech/blob/master/Catalan_Text_To_Speeh_Demo.ipynb)
+Complete notebook for data gathering as well as training the Punctuation and Capitalization model for catalan language can be found here [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1Yp0FQyn03PsL_Qy5TGLdrU-RTKjJ-mLK#scrollTo=us_WH_dlCQsq)
 
 <br>
 
-Also pretrained model can be found here [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/mehdihosseinimoghadam/Catalan-Text-to-Speech/blob/master/Catalan_Text_To_Speeh_Demo.ipynb)
-
+Also pretrained model for inference can be found here 
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1IjI6KTGcs-afl_CY8tnUw-g2Qgn1MIXe?authuser=5#scrollTo=cWBpRHD3wjcr)
 -----------------------------------------------------------------------
 <br>
 
@@ -177,40 +158,49 @@ And Model Output:
 `Query   : si acabo d'hora aniré a mirar roba`
 <br>
 `Combined: Si acabo d'hora, aniré a mirar roba.`
+<br>
 ---------------------------------------------------------------------------------------<br>
 `Query   : necessitem vacances`
 <br>
 `Combined: Necessitem vacances.`
------------------------------------------------------------- <br>
+<br>
+--------------------------------------------------------------------------------------- <br>
 `Query   : a partir d'aquí`
 <br>
 `Combined: A partir d'aquí.`
------------------------------------------------------------- <br>
+<br>
+--------------------------------------------------------------------------------------- <br>
 `Query   : acabat el debat procedirem a la votació`
 <br>
 `Combined: Acabat el debat, procedirem a la votació.`
------------------------------------------------------------- <br>
+<br>
+--------------------------------------------------------------------------------------- <br>
 `Query   : ah déu meu`
 <br>
 `Combined: Ah, Déu meu.`
------------------------------------------------------------- <br>
+<br>
+--------------------------------------------------------------------------------------- <br>
 `Query   : bona tarda diputats diputades`
 <br>
 `Combined: Bona tarda Diputats diputades.`
------------------------------------------------------------- <br>
+<br>
+--------------------------------------------------------------------------------------- <br>
 `Query   : a barcelona i a cubells deu mules són cinc parells`
 <br>
 `Combined: A Barcelona i a Cubells, deu mules són cinc parells.`
------------------------------------------------------------- <br>
+<br>
+--------------------------------------------------------------------------------------- <br>
 `Query   : a beure i a menjar mesura has de posar`
 <br>
 `Combined: A beure i a menjar mesura, has de posar.`
------------------------------------------------------------- <br>
+<br>
+--------------------------------------------------------------------------------------- <br>
 
 
+Due to the low frequency of question and exclamation mark, as it can be seen from the results, they are not accurate as commas and periods, this problem can be easily addressed by increasing their frequency.
 
+--------------------------------------------------------------------------------------
 
+Here are some statistics for punctuation and capitalization model for catalan language
 
-
-
-              
+<img width="798" alt="Screen Shot 2022-04-28 at 6 56 52 PM" src="https://user-images.githubusercontent.com/53477752/165775263-29c266e5-5ca5-4e63-be39-470c76e935c6.png">
